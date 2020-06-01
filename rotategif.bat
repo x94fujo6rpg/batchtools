@@ -1,5 +1,5 @@
 @echo off
-::if you have code problem 
+::if you have garbled problem 
 ::make sure you save this file as utf-8 (no BOM)
 chcp 65001
 cls
