@@ -64,7 +64,6 @@ echo [!date! !time!] pnglib=%pnglib% >> webm2gif_drag.log
 echo [!date! !time!] decimal=%dec% >> webm2gif_drag.log
 echo [!date! !time!] ____________________________________________________________ >> webm2gif_drag.log
 
->> webm2gif_drag.log
 :loop
 if "%~1" == "" (
 	echo [!date! !time!] no file input
