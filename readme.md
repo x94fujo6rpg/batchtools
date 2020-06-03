@@ -1,6 +1,9 @@
 ## webm2gif
 convert webm to gif  
-require [**ffmpeg(ffprobe)**](https://ffmpeg.zeranoe.com/builds/) and [**gifski**](https://gif.ski/)
+require  
+[**ffmpeg(ffprobe)**](https://ffmpeg.zeranoe.com/builds/)  
+[**gifski**](https://gif.ski/) Highest-quality GIF encoder  
+
 
 Installed and add to environment variable  
 run powershell or cmd to check:  
