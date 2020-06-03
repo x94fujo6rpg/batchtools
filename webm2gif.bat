@@ -25,14 +25,14 @@ set _pnglib=""
 ::if not set,this batch will creat a folder at video path
 
 ::set 1~100 , recommend set this higher than 50 , 100 is best quality
-set _gifquality=100
+set _gifquality=75
 
 ::threshold ex: min=15 max=30 then gif will be 15~30fps (auto selected via r_frame_rate from ffprobe)
-set _minfps=30
+set _minfps=20
 set _maxfps=30
 
 ::set max gif width/height (if width/height bigger than this , auto down scale to this value)
-set _ow=720
+set _ow=400
 
 ::set calculate accurate to N decimal
 set _dec=2
@@ -128,13 +128,13 @@ GOTO :eof
 	
 	::untest
 	if "%~x1" == ".m4v" GOTO :eof
-	if "%~x1" == ".flv" GOTO :eof	
+	if "%~x1" == ".flv" GOTO :eof
 	if "%~x1" == ".hls" GOTO :eof
 	if "%~x1" == ".gif" GOTO :eof
 	if "%~x1" == ".mov" GOTO :eof
 	if "%~x1" == ".webp" GOTO :eof
 	if "%~x1" == ".avi" GOTO :eof
-	if "%~x1" == ".wmv" GOTO :eof	
+	if "%~x1" == ".wmv" GOTO :eof
 	
 	call :echo2 "[error] %~nx1 is an unsupported format , ignore"
 	call :echo2 "____________________________________________________________"
@@ -167,9 +167,12 @@ GOTO :eof
 	if %__mod% GTR 0 ( 
 		set /a "__num=(%__num%+100)/100"
 		call :echo2 "roundup"
+		goto roundup_skip
 	) ELSE (
 		set /a "__num=%__num%/100"
+		goto roundup_skip
 	)
+	:roundup_skip
 	ENDLOCAL & set _autofps=%__num% & call :echo2 "video_fps=%_autofps%"
 GOTO :eof
 
@@ -187,14 +190,18 @@ GOTO :eof
 	if %__fps% GTR %__max% (
 		set __fps=%__max%
 		call :echo2 "fps too high,set gif_fps=%__max%"
+		goto fixfps_skip
 	) else (
 		if %__fps% LSS %__min% (
 			set __fps=%__min%
 			call :echo2 "fps too low,set gif_fps=%__min%"
+			goto fixfps_skip
 		) else (
 			call :echo2 "set gif_fps=%__fps%"
+			goto fixfps_skip
 		)
-	)	
+	)
+	:fixfps_skip
 	ENDLOCAL & set _autofps=%__fps%
 GOTO :eof
 
@@ -213,12 +220,15 @@ GOTO :eof
 	
 	IF EXIST !__png! (
 		call :echo2 "extract exist,skip"
+		GOTO extractpng_skip
 	) ELSE (
 		call :echo2 "extracting..."
 		md "!__png!"
 		ffmpeg -i %1 -r %__fps% "%__pnglib%\%~n1_f%__fps%\f%%04d.png" -n -hide_banner -v quiet
 		call :echo2 "png extract complete"
+		GOTO extractpng_skip	
 	)
+	:extractpng_skip
 	ENDLOCAL
 GOTO :eof
 
@@ -245,19 +255,24 @@ GOTO :eof
 			set /a __asp=!__dec2!*!__h!/!__ow!
 			set /a __res=!__dec2!*!__w!/!__asp!
 			call :echo2 "width＜height and height＞max,width scale down to [!__res!]"
+			goto calasp_skip
 		) ELSE (
 			set __res=%__w%
 			call :echo2 "width＜height but height＜max,use original width [!__res!]"
+			goto calasp_skip
 		)
 	) ELSE (
 		if %__w% GTR %__ow% (
 			set __res=%__ow%
 			call :echo2 "width＞height and width＞max,width scale down to [!__res!]"
+			goto calasp_skip
 		) ELSE (
 			set __res=%__w%
 			call :echo2 "width＞height but width＜max,use original width [!__res!]"
+			goto calasp_skip
 		)
 	)
+	:calasp_skip
 	ENDLOCAL & set _res=%__res%
 GOTO :eof
 
@@ -278,6 +293,7 @@ GOTO :eof
 	set __png=%__pnglib%\%~n1_f%__fps%
 	IF EXIST !__gif! (
 		call :echo2 "gif exist,skip"
+		goto gengif_skip
 	) ELSE (
 		call :echo2 "converting..."
 		cd /d "%__png%"
@@ -285,7 +301,9 @@ GOTO :eof
 		cd /d "%_mypath%"
 		echo:
 		call :echo2 "gif convert complete"
+		goto gengif_skip
 	)
+	:gengif_skip
 	ENDLOCAL
 GOTO :eof
 
@@ -294,21 +312,24 @@ GOTO :eof
 ::echo to screen and file if enable log
 ::=====================================================================
 :echo2
-	SETLOCAL
 	if %1 == 1 (
 		if "%_log%" == "True" (
 			echo [%date% %time%] %~2%3
 			echo [%date% %time%] %~2%3 >> !_mylog!
+			goto :endecho
 		) else (
 			echo [%date% %time%] %~2%3
+			goto :endecho
 		)
 	) else (
 		if "%_log%" == "True" (
 			echo [%date% %time%] %~1
 			echo [%date% %time%] %~1 >> !_mylog!
+			goto :endecho
 		) else (
 			echo [%date% %time%] %~1
+			goto :endecho
 		)
 	)
-	ENDLOCAL
+	:endecho
 GOTO :eof
