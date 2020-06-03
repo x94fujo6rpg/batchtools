@@ -1,5 +1,5 @@
 ## video2gif
-convert webm to gif  
+convert video to gif  
 require  
 [**ffmpeg(ffprobe)**](https://ffmpeg.zeranoe.com/builds/)  
 [**gifski**](https://gif.ski/) Highest-quality GIF encoder  
@@ -18,7 +18,7 @@ gifski -V
 * wait
 * gif will save to same path as webm
 
-gif, log, pnglib(if not set) will at same path as webm  
+gif, log, pnglib(if not set) will at same path as video  
 can be execute wherever this batch at
 
 ### notice
