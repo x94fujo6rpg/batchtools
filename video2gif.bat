@@ -170,7 +170,6 @@ GOTO :eof
 		goto roundup_skip
 	) ELSE (
 		set /a "__num=%__num%/100"
-		goto roundup_skip
 	)
 	:roundup_skip
 	ENDLOCAL & set _autofps=%__num% & call :echo2 "video_fps=%_autofps%"
@@ -198,7 +197,6 @@ GOTO :eof
 			goto fixfps_skip
 		) else (
 			call :echo2 "set gif_fps=%__fps%"
-			goto fixfps_skip
 		)
 	)
 	:fixfps_skip
@@ -226,7 +224,6 @@ GOTO :eof
 		md "!__png!"
 		ffmpeg -i %1 -r %__fps% "%__pnglib%\%~n1_f%__fps%\f%%04d.png" -n -hide_banner -v quiet
 		call :echo2 "png extract complete"
-		GOTO extractpng_skip	
 	)
 	:extractpng_skip
 	ENDLOCAL
@@ -269,7 +266,6 @@ GOTO :eof
 		) ELSE (
 			set __res=%__w%
 			call :echo2 "width＞height but width＜max,use original width [!__res!]"
-			goto calasp_skip
 		)
 	)
 	:calasp_skip
@@ -301,7 +297,6 @@ GOTO :eof
 		cd /d "%_mypath%"
 		echo:
 		call :echo2 "gif convert complete"
-		goto gengif_skip
 	)
 	:gengif_skip
 	ENDLOCAL
@@ -328,7 +323,6 @@ GOTO :eof
 			goto :endecho
 		) else (
 			echo [%date% %time%] %~1
-			goto :endecho
 		)
 	)
 	:endecho
