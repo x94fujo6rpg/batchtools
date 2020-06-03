@@ -14,7 +14,7 @@ gifski -V
 
 ### usage
 * set pnglib (a folder to save extracted png file)
-* drag *.webm into this batch
+* drag video into this batch
 * wait
 * gif will save to same path as webm
 
@@ -30,12 +30,12 @@ it can take massive disk space if you convert frequently
 
 ### update
 2020/06/02 rewritten  
-now it can execute anywhere, just drag file into it
-
+now it can execute anywhere, just drag file into it  
 in theory, this batch can handle all the video formats supported by ffmpeg  
+now support: webm,mp4,mkv  
+un test: webp,m4v,mov,avi,wmv,flv,hls,gif
 
-still need to rewritten format check
-
+---
 
 ## rotategif
 lossless rotate gif (and other formats supported by magick)  
