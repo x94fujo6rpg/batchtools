@@ -47,7 +47,7 @@ set _log=True
 call :echo2 "=========================================================="
 
 ::get current path
-set _mypath=%cd%
+set _mypath="%cd%"
 
 ::set log path
 set _mylog="%_mypath%\%~n0.log"
