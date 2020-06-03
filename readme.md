@@ -33,7 +33,7 @@ it can take massive disk space if you convert frequently
 now it can execute anywhere, just drag file into it  
 in theory, this batch can handle all the video formats supported by ffmpeg  
 now support: **webm, mp4, mkv**  
-un test: **webp, m4v, mov, avi, wmv, flv, hls, gif**
+untest: **webp, m4v, mov, avi, wmv, flv, hls, gif**
 
 ---
 
