@@ -114,12 +114,24 @@ exit
 		goto end
 	)
 
-	if not "%~x1" == ".webm" (
-		call :echo2 "[error] %~nx1 is an unsupported format , ignore"
-		call :echo2 "____________________________________________________________"
-		shift
-		goto loop
-	)
+	if "%~x1" == ".webm" GOTO :eof
+	if "%~x1" == ".mp4" GOTO :eof
+	if "%~x1" == ".mkv" GOTO :eof
+	
+	::untest
+	if "%~x1" == ".m4v" GOTO :eof
+	if "%~x1" == ".flv" GOTO :eof	
+	if "%~x1" == ".hls" GOTO :eof
+	if "%~x1" == ".gif" GOTO :eof
+	if "%~x1" == ".mov" GOTO :eof
+	if "%~x1" == ".webp" GOTO :eof
+	if "%~x1" == ".avi" GOTO :eof
+	if "%~x1" == ".wmv" GOTO :eof	
+	
+	call :echo2 "[error] %~nx1 is an unsupported format , ignore"
+	call :echo2 "____________________________________________________________"
+	shift
+	goto loop
 GOTO :eof
 
 
