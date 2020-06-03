@@ -101,7 +101,7 @@ exit
 		cd /d %2
 			if EXIST "%cd%\png(extract)" (
 				call :echo2 "found at source path,set as pnglib"
-				goto :lib_check_skip
+				goto lib_check_skip
 			) else (
 				call :echo2 "[31mpnglib not set[0m,creat a folder at source path"
 				md "png(extract)"
