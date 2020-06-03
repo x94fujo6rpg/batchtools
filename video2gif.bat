@@ -2,7 +2,7 @@
 chcp 65001
 setlocal EnableDelayedExpansion
 cls
-::convert all webm drag into this batch to gif
+::convert all video drag into this batch to gif
 ::you can modify it to any format that ffmpeg support
 
 ::this batch require ffmpeg(ffprobe) and gifski
@@ -294,7 +294,7 @@ GOTO :eof
 		call :echo2 "converting..."
 		cd /d "%__png%"
 		gifski -o "%__gif%" f*.png -W %__res% --quality %__quality% --fps %__fps%
-		cd /d "%_mypath%"
+		cd /d %_mypath%
 		echo:
 		call :echo2 "gif convert complete"
 	)
