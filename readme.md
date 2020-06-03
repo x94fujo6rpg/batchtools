@@ -15,17 +15,23 @@ gifski -V
 * wait
 * gif will save to same path as webm
 
+gif, log, pnglib(if not set) will at same path as webm  
+can be execute wherever this batch at
+
 ### notice
-if you interrupted this batch  
-you need to delete the lastest folder it created  
-recommend interrupt when it generating gif
+if you interrupted this batch 
+you need to delete the lastest folder/file it created  
 
 you may want clean pnglib folder regularly  
 it can take massive disk space if you convert frequently  
 
 ### update
-In theory, this batch can handle all the video formats supported by ffmpeg  
-Maybe I will update when I have time
+2020/06/02 rewritten  
+now it can execute anywhere, just drag file into it
+
+in theory, this batch can handle all the video formats supported by ffmpeg  
+
+still need to rewritten format check
 
 
 ## rotategif
