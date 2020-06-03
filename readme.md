@@ -1,4 +1,4 @@
-## webm2gif
+## video2gif
 convert webm to gif  
 require  
 [**ffmpeg(ffprobe)**](https://ffmpeg.zeranoe.com/builds/)  
